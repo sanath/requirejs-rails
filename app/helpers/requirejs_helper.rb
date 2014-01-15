@@ -96,9 +96,14 @@ module RequirejsHelper
   end
 
   def baseUrl(js_asset)
-    js_asset_path = javascript_path(js_asset)
-    uri = URI.parse(js_asset_path)
-    asset_host = uri.host && js_asset_path.sub(uri.request_uri, '')
-    [asset_host, Rails.application.config.assets.prefix].join
+    run_config = Rails.application.config.requirejs.run_config
+    if run_config.has_key?('baseUrl')
+      run_config['baseUrl']
+    else
+      js_asset_path = javascript_path(js_asset)
+      uri = URI.parse(js_asset_path)
+      asset_host = uri.host && js_asset_path.sub(uri.request_uri, '')
+      [asset_host, Rails.application.config.assets.prefix].join
+    end
   end
 end
