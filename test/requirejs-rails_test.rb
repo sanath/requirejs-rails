@@ -24,7 +24,7 @@ end
 
 class RequirejsRailsConfigTest < ActiveSupport::TestCase
   def setup
-    @cfg = Requirejs::Rails::Config.new(Rails.application)
+    @cfg = Requirejs::Rails::Config.new
   end
 
   test "config accepts known loaders" do
